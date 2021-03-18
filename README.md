@@ -24,4 +24,25 @@ To start and stop the lab
 ./hyperctl stop
 ```
 
+## Install bash-completion 
+```
+sudo yum install bash-completion
+source /usr/share/bash-completion/bash_completion
+```
 
+ Source the completion script in your ~/.bashrc file:
+
+```
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+```
+
+If you have an alias for kubectl, you can extend shell completion to work with that alias:
+
+```
+echo 'alias k=kubectl' >>~/.bashrc
+echo 'complete -F __start_kubectl k' >>~/.bashrc
+```
+
+# POD definition
+
+```kubectl run nginx --image=nginx --dry-run -o yaml > pod-definition.yaml```
