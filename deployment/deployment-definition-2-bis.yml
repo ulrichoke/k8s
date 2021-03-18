@@ -16,7 +16,6 @@ spec:
     metadata:
       labels:
         type: front-end
-
     spec:
       containers:
       - image: tomcat:8-jdk11-corretto
