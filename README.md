@@ -44,5 +44,5 @@ echo 'complete -F __start_kubectl k' >>~/.bashrc
 ```
 
 # POD definition
-
+## Generate a pod YAML file
 ```kubectl run nginx --image=nginx --dry-run -o yaml > pod-definition.yaml```
