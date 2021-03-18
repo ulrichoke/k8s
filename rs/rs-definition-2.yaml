@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myrs-1
+  labels:
+     app: tier3
+     type: backend-end
+  namespace: dev
+
+spec:
+   replicas: 4
+   selector:
+     matchLabels:
+        app: tier3
+   template:
+     metadata:
+        name: mypod2
+        labels:
+           app: tier3
+     spec:
+       containers:
+          - image: redis
+            name: backend-db

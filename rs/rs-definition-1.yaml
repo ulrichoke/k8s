@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myrs-1
+  labels:
+     app: tier2
+     type: front-end
+
+
+spec:
+   replicas: 4
+   selector:
+     matchLabels:
+        app: tier2
+   template:
+     metadata:
+        name: mypod2
+        labels:
+           app: tier2
+     spec:
+       containers:
+          - image: nginx
+            name: webapp
+          - image: redis
+            name: keystore
+       restartPolicy: Always
+
+         
