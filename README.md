@@ -51,4 +51,7 @@ echo 'complete -F __start_kubectl k' >>~/.bashrc
 
 # DEPLOYMENT definition
 ## Generate a deployment YAML file 
+```
 kubectl create deployment mydeployment --image=nginx --dry-run=true -o yaml > deployment-definition-1.yml
+```
+
