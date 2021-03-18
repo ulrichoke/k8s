@@ -24,7 +24,7 @@ To start and stop the lab
 ./hyperctl stop
 ```
 
-## Install bash-completion 
+## Setup bash-completion 
 ```
 sudo yum install bash-completion
 source /usr/share/bash-completion/bash_completion
