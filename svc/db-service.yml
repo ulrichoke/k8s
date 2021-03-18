@@ -3,7 +3,7 @@ kind: Service
 metadata:
     name: db-service
     namespace: dev
-
+ 
 spec:
     type: ClusterIP
     ports:

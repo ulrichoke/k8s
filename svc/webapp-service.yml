@@ -3,7 +3,7 @@ kind: Service
 metadata:
    name: deployment-service
    namespace: dev
-
+ 
 spec:
     type: NodePort
     ports:
