@@ -3,7 +3,7 @@ YAML examples
 
 
 # My installation 
-## For my sefpaced learning
+## For my self paced learning
 - Host OS: Mac Big Sur
 - K8s installation tool: hyperctl 
 
