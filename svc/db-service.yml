@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: db-service
+    namespace: dev
+
+spec:
+    type: ClusterIP
+    ports:
+      - targetPort: 6379
+        port: 6379
+        name: redis
+      - targetPort: 3306
+        port: 3306
+        name: mysql
+    selector:
+        type: db-tier

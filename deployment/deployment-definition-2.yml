@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    type: front-end
-  name: proxy-nginx
+    type: backend-end
+  name: website1-app
   namespace: dev
 
 spec:
-  replicas: 2
+  replicas: 6
   selector:
     matchLabels:
       type: front-end
