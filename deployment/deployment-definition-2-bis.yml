@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     type: backend-end
-  name: web-app
+  name: web-app2
   namespace: dev
 
 spec:
@@ -19,5 +19,5 @@ spec:
 
     spec:
       containers:
-      - image: nginx
-        name: nginx
+      - image: tomcat:8-jdk11-corretto
+        name: tomcat
