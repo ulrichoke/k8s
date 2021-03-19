@@ -60,7 +60,7 @@ kubectl create deployment mydeployment --image=nginx --dry-run=true -o yaml > de
 ```
 $ kubectl create deploy webapp --image=nginx:alpine --replicas=3
 ```
-## Create service to access deployment
+## Create NodePort service to access deployment
 
 - deployment: webapp-deploy
 - pod: webapp-svc
