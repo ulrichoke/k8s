@@ -44,18 +44,18 @@ echo 'alias k=kubectl' >>~/.bashrc
 echo 'complete -F __start_kubectl k' >>~/.bashrc
 ```
 
-# POD definition
+# 1. POD definition
 ## Generate a pod YAML file
 ```kubectl run nginx --image=nginx --dry-run -o yaml > pod-definition.yaml```
 
 
-# DEPLOYMENT definition
+# 2. DEPLOYMENT definition
 ## Generate a deployment YAML file 
 ```
 kubectl create deployment mydeployment --image=nginx --dry-run=true -o yaml > deployment-definition-1.yml
 ```
 
-# Imperative commands
+# 3. Imperative commands
 ## Create deployment
 ```
 $ kubectl create deploy webapp --image=nginx:alpine --replicas=3
