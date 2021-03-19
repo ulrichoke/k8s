@@ -55,3 +55,74 @@ echo 'complete -F __start_kubectl k' >>~/.bashrc
 kubectl create deployment mydeployment --image=nginx --dry-run=true -o yaml > deployment-definition-1.yml
 ```
 
+# Imperative commands
+## Create deployment
+```
+$ kubectl create deploy webapp --image=nginx:alpine --replicas=3
+```
+## Create service to access deployment
+
+- deployment: webapp-deploy
+- pod: webapp-svc
+- type: NodePort
+- targetPort (cluster port): 8080
+- port (deployment port): 8080
+- nodePort: 30080
+- selector: front-end 
+```
+$ kubectl expose deployment webapp-deploy --name=webapp-svc --type=NodePort --target-port=8080 --port=8080 --dry-run -o yaml > svc.yml
+$ vi svc.yml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-svc
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30080
+  selector:
+    type: front-end
+  type: NodePort
+status:
+  loadBalancer: {}
+---
+
+$ kubectl create -f svc.yml
+
+```
+
+## Create ClusterIP service to expose redis pod on cluster port 6379
+
+```
+$ kubectl expose pod --name=redis-service redis --port 6379
+```
+## Create a new pod called my-nginx with nginx image and expose it on container port 8080
+```
+$ kubectl run my-nginx --image=nginx --port=8080
+```
+## Create namespace dev
+```
+$ kubectl create ns dev
+```
+
+## Create a new deployment called redis-deploy
+
+- namespace= dev 
+- image= redis
+- 2 replicas
+```
+$ kubectl create deployment redis-deploy --image=redis --namespace=dev --replicas=2
+```
+
+## Create a pod and service in a few steps
+
+- image: nginx:alpine 
+- service type: ClusterIP
+- target port: 80
+
+```
+kubectl run httpd --image=httpd:alpine --expose --port 80
+```
