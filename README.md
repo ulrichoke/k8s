@@ -124,5 +124,5 @@ $ kubectl create deployment redis-deploy --image=redis --namespace=dev --replica
 - target port: 80
 
 ```
-kubectl run httpd --image=httpd:alpine --expose --port 80
+kubectl run httpd --image=nginx:alpine --expose --port 80
 ```
