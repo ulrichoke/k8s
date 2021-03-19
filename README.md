@@ -70,7 +70,7 @@ $ kubectl create deploy webapp --image=nginx:alpine --replicas=3
 - nodePort: 30080
 - selector: front-end 
 ```
-$ kubectl expose deployment webapp-deploy --name=webapp-svc --type=NodePort --target-port=8080 --port=8080 --dry-run -o yaml > svc.yml
+$ kubectl expose deployment webapp --name=webapp-svc --type=NodePort --target-port=8080 --port=8080 --dry-run -o yaml > svc.yml
 $ vi svc.yml
 ---
 apiVersion: v1
