@@ -94,11 +94,19 @@ $ kubectl create -f svc.yml
 
 ```
 
+## Create ClusterIP service
+- targetPort and port: 6379
+```
+kubectl create service clusterip redis-service --tcp=6379:6379 --dry-run=client -o yaml > clusterip-svc.yml
+```
+
+
 ## Create ClusterIP service to expose redis pod on cluster port 6379
 
 ```
 $ kubectl expose pod --name=redis-service redis --port 6379
 ```
+
 ## Create a new pod called my-nginx with nginx image and expose it on container port 8080
 ```
 $ kubectl run my-nginx --image=nginx --port=8080
