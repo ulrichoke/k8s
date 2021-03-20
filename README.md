@@ -123,7 +123,8 @@ $ kubectl create ns dev
 - image= redis
 - 2 replicas
 ```
-$ kubectl create deployment redis-deploy --image=redis --namespace=dev --replicas=2
+$ kubectl create deployment redis-deploy --image=redis --namespace=dev 
+$ kubectl scale deployment redis-deploy --replicas=2
 ```
 
 ## Create a pod and service in a few steps
