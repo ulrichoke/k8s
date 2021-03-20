@@ -97,7 +97,8 @@ $ kubectl create -f svc.yml
 ## Create ClusterIP service
 - targetPort and port: 6379
 ```
-kubectl create service clusterip redis-service --tcp=6379:6379 --dry-run=client -o yaml > clusterip-svc.yml
+$ kubectl create service clusterip redis-service --tcp=6379:6379 --dry-run=client -o yaml > clusterip-svc.yml
+$ kubectl create clusterip-svc.yml
 ```
 
 
