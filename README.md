@@ -138,7 +138,7 @@ kubectl run httpd --image=nginx:alpine --expose --port 80
 ```
 
 
-# Scheduling
+# 4. Scheduling
 ## Set a taint on a node
 ```
 $ kubectl taint node mynode-name key=value:taint-effect
