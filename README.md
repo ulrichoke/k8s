@@ -136,3 +136,11 @@ $ kubectl scale deployment redis-deploy --replicas=2
 ```
 kubectl run httpd --image=nginx:alpine --expose --port 80
 ```
+
+
+# Scheduling
+## Set a taint on a node
+```
+$ kubectl taint nodes **mynode-name** key=value:taint-effect
+``` 
+**taint-effect** possible value: NoSchedule | PreferNoSchedule | NoExecute
