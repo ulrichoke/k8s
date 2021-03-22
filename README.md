@@ -145,6 +145,10 @@ $ kubectl taint node mynode-name key=value:taint-effect
 ``` 
 **taint-effect** possible value: NoSchedule | PreferNoSchedule | NoExecute
 
+- ***NoSchedule:*** Pods that do not tolerate this taint are not scheduled on the node.
+- ***PreferNoSchedule:*** Kubernetes avoids scheduling Pods that do not tolerate this taint onto the node.
+- ***NoExecute:*** Pod is evicted from the node if it is already running on the node, and is not scheduled onto the node if it is not yet running on the node.
+
 ## Remove taint from a node
 e.g.
 ```

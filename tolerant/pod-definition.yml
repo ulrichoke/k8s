@@ -16,4 +16,4 @@ spec:
    - key: "deployment"
      operator: "Equal"
      value: "green"
-     effect: "PreferNoSchedule"
+     effect: "NoExecute"
