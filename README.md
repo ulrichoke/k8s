@@ -144,3 +144,10 @@ kubectl run httpd --image=nginx:alpine --expose --port 80
 $ kubectl taint nodes mynode-name key=value:taint-effect
 ``` 
 **taint-effect** possible value: NoSchedule | PreferNoSchedule | NoExecute
+
+## Remove taint from a node
+e.g.
+```
+$ kubectl taint node node1 deployment=green:PreferNoSchedule-
+```
+

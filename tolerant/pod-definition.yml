@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: httpd-green-tolerant
+  labels:
+     app: webapp
+     tier: frontend
+  annotations:
+     email: ulrichoke@gmail.com
+     build: v1
+spec:
+   containers:
+   - image: httpd
+     name: apache2
+   tolerations:
+   - key: "deployment"
+     operator: "Equal"
+     value: "green"
+     effect: "PreferNoSchedule"
