@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: httpd-green-tolerant
+  name: httpd-on-node1
   labels:
      app: webapp
      tier: frontend
