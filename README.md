@@ -139,6 +139,15 @@ kubectl run httpd --image=nginx:alpine --expose --port 80
 
 
 # 4. Scheduling
+
+## Command tips
+
+To check the options that could be used for tolerations for e.g:
+
+```
+$ kubectl explain pod --recursive | grep -A5 tolerations
+```
+
 ## Set a taint on a node
 ```
 $ kubectl taint node mynode-name key=value:taint-effect
