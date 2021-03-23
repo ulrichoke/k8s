@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-is-placed-on-t2-node
+  labels:
+     app: webapp
+     tier: frontend
+  annotations:
+     email: ulrichoke@gmail.com
+     build: v1.0.1
+spec:
+   containers:
+   - image: httpd
+     name: apache2
+   nodeSelector:
+      size: t2.large
+   

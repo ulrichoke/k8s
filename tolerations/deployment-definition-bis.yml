@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-with-affinity
+  labels:
+     app: webapp
+     tier: frontend
+  annotations:
+     email: ulrichoke@gmail.com
+     build: v1.0.1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp
+
+  template:
+    metadata:
+      name: httpd-web-app-affinity
+      labels:
+          app: webapp
+    spec:
+      containers:
+        - image: httpd
+          name: apache2
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: Exists
