@@ -9,12 +9,7 @@ metadata:
      email: ulrichoke@gmail.com
      build: v1.0.1
 spec:
+   nodeName: node1
    containers:
    - image: httpd
      name: apache2
-   tolerations:
-   - key: "deployment"
-     operator: "Equal"
-     value: "green"
-     effect: "PreferNoSchedule"
-   
