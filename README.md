@@ -148,6 +148,13 @@ To check the options that could be used for tolerations for e.g:
 $ kubectl explain pod --recursive | grep -A5 tolerations
 ```
 
+To remove a node label:
+
+```
+$ kubectl label node nodename labelkey-
+```
+
+
 ## Set a taint on a node
 ```
 $ kubectl taint node mynode-name key=value:taint-effect
