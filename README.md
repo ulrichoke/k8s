@@ -66,6 +66,12 @@ kubeconfig.yaml
 ```
 staticPodPath: /etc/kubernetes/manifests
 ```
+Use the following command to find the path:
+
+```
+ps -aux | grep kubelet
+```
+
 Note: this type of pod when created has its name suffixed with the node name on which the file is defined.
 
 # 2. DEPLOYMENT definition
