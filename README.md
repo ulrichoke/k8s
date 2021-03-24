@@ -76,7 +76,7 @@ Note: this type of pod when created has its name suffixed with the node name on 
 
 Example: 
 ```
-kubectl run static-http --image=httpd --output yaml --dry-run=client --restart=Never  --command -- sleep 1000 >  /etc/kubernetes/manifests/static-pod-httpd.yaml
+kubectl run static-pod --image=busybox --output yaml --dry-run=client --restart=Never  --command -- sleep 1000 >  /etc/kubernetes/manifests/static-pod-1.yaml
 ```
 
 # 2. DEPLOYMENT definition
