@@ -66,7 +66,7 @@ kubeconfig.yaml
 ```
 staticPodPath: /etc/kubernetes/manifests
 ```
-
+Note: this type of pod when created has its name suffixed with the node name on which the file is defined.
 
 # 2. DEPLOYMENT definition
 ## Generate a deployment YAML file 
