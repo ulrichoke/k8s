@@ -65,6 +65,7 @@ Exec-Start=/usr/bin/local/kubelet \\
 kubeconfig.yaml
 ```
 staticPodPath: /etc/kubernetes/manifests
+```
 
 
 # 2. DEPLOYMENT definition
