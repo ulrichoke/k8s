@@ -49,7 +49,7 @@ echo 'complete -F __start_kubectl k' >>~/.bashrc
 ```kubectl run nginx --image=nginx --dry-run -o yaml > pod-definition.yaml```
 
 ## Static POD
-Static are defined by a manifest file. They run on independant worker node or not managed through the kube-apiserver.
+Static are defined by a manifest file. They run on independant worker node and not managed through the kube-apiserver.
 
 Two ways for its definition:
 - In the standard manifests folder:
