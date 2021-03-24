@@ -48,6 +48,24 @@ echo 'complete -F __start_kubectl k' >>~/.bashrc
 ## Generate a pod YAML file
 ```kubectl run nginx --image=nginx --dry-run -o yaml > pod-definition.yaml```
 
+## Static POD
+Static are defined by a manifest file. They run on independant worker node or not managed through the kube-apiserver.
+
+Two ways for its definition:
+- In the standard manifests folder:
+Create pod YAML file inside  ```/etc/kubernetes/manifests ```
+
+- In a custom path as a kubelet.service configuration option: 
+```
+Exec-Start=/usr/bin/local/kubelet \\
+....
+  --config = kubeconfig.yaml \\
+....
+```
+kubeconfig.yaml
+```
+staticPodPath: /etc/kubernetes/manifests
+
 
 # 2. DEPLOYMENT definition
 ## Generate a deployment YAML file 
