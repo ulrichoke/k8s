@@ -66,7 +66,7 @@ kubeconfig.yaml
 ```
 staticPodPath: /etc/kubernetes/manifests
 ```
-Use the following command to find the path:
+Use the following command to find the config file location in the cluster:
 
 ```
 ps -aux | grep kubelet
