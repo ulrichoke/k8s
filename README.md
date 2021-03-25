@@ -216,10 +216,26 @@ $ kubectl rollout history deployment webapp3
 ### Recreate
 All pods in a deployment are bring down first and then a new deployment is performed.
 
+```
+  strategy:
+    type: Recreate
+
+```
+
+
 ### Rolling Update (default deployment strategy in k8s)
 Each pod in a deployment will be taken down and replaced by a newer version one by one.
 Related k8s commands are:
 
 - kubectl apply -f ...
 - kubectl set image ...
-- 
+
+```
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+```
+-> 25% means 1/4 of total at a time
