@@ -225,7 +225,7 @@ All pods in a deployment are bring down first and then a new deployment is perfo
 
 
 ### Rolling Update (default deployment strategy in k8s)
-Each pod in a deployment will be taken down and replaced by a newer version one by one.
+N% of pods in a deployment will be taken down and replaced by equivalent few newer version at a time.
 Related k8s commands are:
 
 - kubectl apply -f ...
