@@ -201,3 +201,25 @@ e.g.
 $ kubectl taint node node1 deployment=green:PreferNoSchedule-
 ```
 
+# 5. Rollout and Versioning
+## Rollout
+Every first deployment will result in triggering a rollout. A new rollout create a new deployment revision.
+### Rollout status
+```
+$ kubectl rollout status deployment webapp3 
+```
+### Revision and history
+```
+$ kubectl rollout history deployment webapp3
+``` 
+## Deployment Strategy
+### Recreate
+All pods in a deployment are bring down first and then a new deployment is performed.
+
+### Rolling Update (default deployment strategy in k8s)
+Each pod in a deployment will be taken down and replaced by a newer version one by one.
+Related k8s commands are:
+
+- kubectl apply -f ...
+- kubectl set image ...
+- 
