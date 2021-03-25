@@ -216,7 +216,7 @@ $ kubectl rollout history deployment webapp3
 ### Recreate
 All pods in a deployment are bring down first and then a new deployment is performed.
 
-***Options in a YAML format***
+***Options in a YAML format:***
 ```
   strategy:
     type: Recreate
@@ -231,7 +231,7 @@ Related k8s commands are:
 - kubectl apply -f ...
 - kubectl set image ...
 
-***Options in a YAML format***
+***Options in a YAML format:***
 ```
   strategy:
     rollingUpdate:
