@@ -280,7 +280,7 @@ Same logic as configMap to define and store secrets.
 ```
 apiVersion: v1
 data:
-  APP1_DB_USER_VAR: mydbuser
+  APP1_DB_USER_VAR: bmV3X3VzZXI=
   APP1_DB_PASSWD_VAR: cGE1NXcwcmQ=
 kind: Secret
 metadata:
