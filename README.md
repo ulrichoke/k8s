@@ -254,6 +254,13 @@ kubectl create configmap configmap-def-1 \
 --from-literal=APP2_VAR2="myapp data2" \
 --dry-run -o yaml > configmap-definition.yml
 ```
+***Or***
+```
+kubectl create configmap configmap-def-1 \
+--from-file=app_config_file
+--dry-run -o yaml > configmap-definition.yml
+```
+
 ## Declaratively
 ```
 apiVersion: v1
