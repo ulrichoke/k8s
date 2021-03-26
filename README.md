@@ -241,3 +241,15 @@ Related k8s commands are:
 
 ```
 -> 25% means 1/4 of total at a time
+
+# 5. ConfigMaps
+Use of ConfigMaps is the best way of managing containers variables or environment data in a kubernetes cluster (within pod definition files).
+
+First create ConfigMaps, a central place to manage the configuration data in the form of key-value pairs. Then reference variables in the pod files.
+
+```
+kubectl create configmap configmap-def-1 \
+--from-literal=APP1_VAR1="myapp data" \
+--from-literal=APP2_VAR2="myapp data2" \
+--dry-run -o yaml > configmap-definition.yml
+```
