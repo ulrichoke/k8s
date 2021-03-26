@@ -257,7 +257,7 @@ kubectl create configmap configmap-def-1 \
 ***Or***
 ```
 kubectl create configmap configmap-def-1 \
---from-file=app_config_file
+--from-file=app_config_file \
 --dry-run -o yaml > configmap-definition.yml
 ```
 
