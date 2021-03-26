@@ -272,3 +272,28 @@ metadata:
   creationTimestamp: null
   name: configmap-def-1
 ```
+
+# 6. Secrets
+Same logic as configMap to define and store secrets.
+
+## Declaratively
+```
+apiVersion: v1
+data:
+  APP1_DB_USER_VAR: mydbuser
+  APP1_DB_PASSWD_VAR: cGE1NXcwcmQ=
+kind: Secret
+metadata:
+  name: secret-def-1
+```
+
+***Encode secrets:***
+```
+echo -n "pa55w0rd" | base64
+```
+***Decode secrets:***
+```
+echo -n "cGE1NXcwcmQ=" | base64 --decode
+```
+
+
