@@ -247,9 +247,21 @@ Use of ConfigMaps is the best way of managing containers variables or environmen
 
 First create ConfigMaps, a central place to manage the configuration data in the form of key-value pairs. Then reference variables in the pod files.
 
+## Imperatively
 ```
 kubectl create configmap configmap-def-1 \
 --from-literal=APP1_VAR1="myapp data" \
 --from-literal=APP2_VAR2="myapp data2" \
 --dry-run -o yaml > configmap-definition.yml
+```
+## Declaratively
+```
+apiVersion: v1
+kind: ConfigMap
+data:
+  APP1_VAR1: myapp data
+  APP2_VAR2: myapp data2
+metadata:
+  creationTimestamp: null
+  name: configmap-def-1
 ```
