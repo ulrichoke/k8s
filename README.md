@@ -242,6 +242,26 @@ Related k8s commands are:
 ```
 -> 25% means 1/4 of total at a time
 
+### Rollback
+This operation lets us undo revert to the older version of applications if there have been multiple deployments in the rollout history.
+
+```
+$ kubectl rollout history deployment webapp3 
+deployment.apps/webapp3 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+
+$ kubectl rollout undo deployment webapp3 
+deployment.apps/webapp3 rolled back
+
+$ kubectl rollout history deployment webapp3 
+deployment.apps/webapp3 
+REVISION  CHANGE-CAUSE
+2         <none>
+3         <none>
+```
+
 # 5. ConfigMaps
 Use of ConfigMaps is the best way of managing containers variables or environment data in a kubernetes cluster (within pod definition files).
 
