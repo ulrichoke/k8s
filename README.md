@@ -327,3 +327,8 @@ The default volumes driver is local and help create volumes on docker hosts ({{/
 
 Third party solutions are: DigitalOcean Block Storage | Azure File Storage | VMware vSphere | gce-docker | Convoy | GlusterFS | NetApp | RexRay | Portworx ...
 
+## CRI
+Container Runtime Interface is a standard that define how an orchestration solutions such as kubernetes will communicate with container runtimes like docker. 
+
+## CSI 
+Container Storage Interface was developed to support multiple storage solutions (AWS EBS, GlusterFS, ...) 
