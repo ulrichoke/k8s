@@ -323,7 +323,7 @@ Examples: AUFS | ZFS | BTRS | DEVICE MAPPER | OVERLAY
 
 ## Volumes drivers
 Volumes are handled by volumes drivers plugins.
-The default volumes driver is local and help create volumes on docker hosts ({{/var/lib/docker/volumes}}).
+The default volumes driver is local and help create volumes on docker hosts ({{ /var/lib/docker/volumes }}).
 
 Third party solutions are: DigitalOcean Block Storage | Azure File Storage | VMware vSphere | gce-docker | Convoy | GlusterFS | NetApp | RexRay | Portworx ...
 
