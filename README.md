@@ -332,3 +332,30 @@ Container Runtime Interface is a standard that define how an orchestration solut
 
 ## CSI 
 Container Storage Interface was developed to support multiple storage solutions (AWS EBS, GlusterFS, ...) 
+
+## Setup NFS client provisioner for PV auto provisionning using helm
+To easy create Persistent Volume on users behalf we make use of nfs-client-provisioner.
+The NFS client provisioner is an automatic provisioner for Kubernetes that uses your already configured NFS server, automatically creating Persistent Volumes.
+(Read more)[https://artifacthub.io/packages/helm/ckotzbauer/nfs-client-provisioner].
+
+An important step to consider bebore proceeding to setup:
+- Install helm on the cluster master if it is not yet done
+- Install nfs-common on kubelet (all cluster nodes)
+- Also in order to support nfs3, we would have to enable statd by : ```start rpcbind service```
+followed by ```nfs-common service``` restart.
+
+Now install nfs-client-provisioner using helm shart:
+```
+$ helm install --set nfs.server=x.x.x.x --set nfs.path=/exported/path_on_remote_server stable/nfs-client-provisioner
+```
+To have provisioner deplyed on other namespaces aimply edit by:
+
+```
+kubectl edit deployments.apps nfs-client-provisioner --output yaml > nsf-client-provisionner.yaml
+```
+
+And then change the namespace for a new deployment
+
+## Setup NFS client provisioner for PV auto provisionning on OpenShift
+
+(Juste clone this GitHub repo)[https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner] and use it.
