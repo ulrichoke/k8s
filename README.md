@@ -356,6 +356,6 @@ kubectl edit deployments.apps nfs-client-provisioner --output yaml > nsf-client-
 
 And then change the namespace for a new deployment
 
-## Setup NFS client provisioner for PV auto provisionning on OpenShift
+## Reference link 
 
-[Juste clone this GitHub repo](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner) and use it.
+[How to Setup Dynamic NFS Provisioning Server For Kubernetes](https://redblink.com/setup-nfs-server-provisioner-kubernetes/).
