@@ -344,7 +344,7 @@ An important step to consider bebore proceeding to setup:
 - Also in order to support nfs3, we would have to enable statd by starting ```rpcbind service```
 followed by ```nfs-common service``` restart.
 
-Now install nfs-client-provisioner using helm shart:
+Now install nfs-client-provisioner using helm chart:
 ```
 $ helm install --set nfs.server=x.x.x.x --set nfs.path=/exported/path_on_remote_server stable/nfs-client-provisioner
 ```
