@@ -334,7 +334,7 @@ Container Runtime Interface is a standard that define how an orchestration solut
 Container Storage Interface was developed to support multiple storage solutions (AWS EBS, GlusterFS, ...) 
 
 ## Setup NFS client provisioner for PV
-To easy create Persistent Volume on users behalf we make use of nfs-client-provisioner.
+To easy create NFS Persistent Volume on users behalf we make use of nfs-client-provisioner.
 The NFS client provisioner is an automatic provisioner for Kubernetes that uses your already configured NFS server, automatically creating Persistent Volumes.
 [Read more](https://artifacthub.io/packages/helm/ckotzbauer/nfs-client-provisioner).
 
