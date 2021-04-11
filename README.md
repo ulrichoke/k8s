@@ -359,3 +359,16 @@ And then change the namespace for a new deployment
 ## Reference link 
 
 [How to Setup Dynamic NFS Provisioning Server For Kubernetes](https://redblink.com/setup-nfs-server-provisioner-kubernetes/).
+
+# 8. Certificates
+## Generate keys and certificate signing request
+```
+openssl genrsa -out ca.key 2048
+openssl req -new -key ca.key -subj "/CN=KUBERNETES-CA" -out ca.csr
+```
+
+## Self sign certificates
+```
+openssl  x509 -req -in ca.csr -signkey ca.key -out ca.crt
+```
+
