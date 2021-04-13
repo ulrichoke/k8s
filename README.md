@@ -348,7 +348,7 @@ Now install nfs-client-provisioner using helm chart:
 ```
 $ helm install --set nfs.server=x.x.x.x --set nfs.path=/exported/path_on_remote_server stable/nfs-client-provisioner
 ```
-To have provisioner deplyed on other namespaces aimply edit by:
+To have provisioner deployed on other namespaces aimply edit by:
 
 ```
 kubectl edit deployments.apps nfs-client-provisioner --output yaml > nsf-client-provisionner.yaml
