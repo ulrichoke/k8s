@@ -371,4 +371,9 @@ openssl req -new -key ca.key -subj "/CN=KUBERNETES-CA" -out ca.csr
 ```
 openssl  x509 -req -in ca.csr -signkey ca.key -out ca.crt
 ```
-
+## Kube admin user certificate
+Create first the admin user key and generate certificate signing request. Then sign with the Kubernetes CA certificate.
+```
+$ openssl genrsa -out admin-key.key 2048
+$ openssl req -new -key admin -subj "/CN=kube-admin" -out admin-key.csr
+$ openssl x509 -req -in admin-key.csr -CA ca.crt -CAkey ca.key -out admin.crt
