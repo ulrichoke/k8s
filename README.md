@@ -377,3 +377,8 @@ Create first the admin user key and generate certificate signing request. Then s
 $ openssl genrsa -out admin-key.key 2048
 $ openssl req -new -key admin -subj "/CN=kube-admin" -out admin-key.csr
 $ openssl x509 -req -in admin-key.csr -CA ca.crt -CAkey ca.key -out admin.crt
+```
+## View certificate
+```
+$ openssl x509 -in admin.crt -text -noout
+```
