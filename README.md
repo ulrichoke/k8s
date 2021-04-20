@@ -382,3 +382,7 @@ $ openssl x509 -req -in admin-key.csr -CA ca.crt -CAkey ca.key -out admin.crt
 ```
 $ openssl x509 -in admin.crt -text -noout
 ```
+
+## Certificate approval using kubectl
+```
+export admin_csr_base64=$(cat admin-key.csr | base64 | tr -d '\n')
