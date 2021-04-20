@@ -383,6 +383,42 @@ $ openssl x509 -req -in admin-key.csr -CA ca.crt -CAkey ca.key -out admin.crt
 $ openssl x509 -in admin.crt -text -noout
 ```
 
-## Certificate approval using kubectl
+## Certificate approval using certificateSigningRequest object
+### 1. Export CSR encoded to environment variable
 ```
 export admin_csr_base64=$(cat admin-key.csr | base64 | tr -d '\n')
+```
+### 2. Create CSR kubernetes object
+ mycsr.yaml 
+```
+---
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: myuser
+spec:
+  groups:
+  - system:authenticated
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+  - server auth
+  - digital signature
+  - key encipherment
+  request: ${admin_csr_base64}
+
+```
+
+
+```
+cat mycsr.yaml | envsubst | kubectl apply -f -
+```
+### 3. Sign the certificate
+```
+kubectl certificate approve myuser
+```
+
+### 4. Get the certificate
+
+```
+kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
+```
