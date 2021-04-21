@@ -407,7 +407,7 @@ spec:
   request: ${admin_csr_base64}
 
 ```
-Depending on k8s installation you may need to use this defintion instead (please check version documentation):
+Depending on k8s installation you may need to use this defintion instead:
 
 ```
 apiVersion: certificates.k8s.io/v1beta1
