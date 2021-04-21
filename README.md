@@ -422,7 +422,7 @@ spec:
   - digital signature
   - key encipherment
   request: ${admin_csr_base64}
-
+```
 
 ```
 cat mycsr.yaml | envsubst | kubectl apply -f -
