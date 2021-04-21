@@ -407,6 +407,21 @@ spec:
   request: ${admin_csr_base64}
 
 ```
+Depending on k8s installation you may need to use this defintion instead (please check version documentation):
+
+```
+apiVersion: certificates.k8s.io/v1beta1
+kind: CertificateSigningRequest
+metadata:
+  name: myuser
+spec:
+  groups:
+  - system:authenticated
+  usages:
+  - server auth
+  - digital signature
+  - key encipherment
+  request: ${admin_csr_base64}
 
 
 ```
