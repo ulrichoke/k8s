@@ -360,7 +360,7 @@ And then change the namespace for a new deployment
 
 [How to Setup Dynamic NFS Provisioning Server For Kubernetes](https://redblink.com/setup-nfs-server-provisioner-kubernetes/).
 
-# 8. Certificates
+# 8. Security
 ## Generate keys and certificate signing request
 ```
 openssl genrsa -out ca.key 2048
@@ -378,7 +378,7 @@ $ openssl genrsa -out admin-key.key 2048
 $ openssl req -new -key admin -subj "/CN=kube-admin" -out admin-key.csr
 $ openssl x509 -req -in admin-key.csr -CA ca.crt -CAkey ca.key -out admin.crt
 ```
-## View certificate
+ View certificate
 ```
 $ openssl x509 -in admin.crt -text -noout
 ```
@@ -437,3 +437,16 @@ kubectl certificate approve myuser
 ```
 kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
 ```
+
+## Authorization mechanisms
+### Node
+Any request comming from user with the name ```system:node:node-name``` and part of the system node group will be handled by the node authorizer.
+### ABAC
+Attribute Based Access Control is an external authorization where a user or a group of users are associated with a set of permissions (view, create, delete pods ...). So you need to create a **policy definition** file for each set of permissions.
+These files are meant to be update manually for any permission change.
+
+### RBAC
+Instead of associating permission to a user RBAC help to easy the management by creating role with a set of permissions.
+e.g. develper role with view, create and delete pods permission in a specific namespace. In this case change are immediately reflected to the user or set of users associated. 
+
+### Webhook
