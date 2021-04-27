@@ -447,6 +447,16 @@ These files are meant to be update manually for any permission change.
 
 ### RBAC
 Instead of associating permission to a user RBAC help to easy the management by creating role with a set of permissions.
-e.g. develper role with view, create and delete pods permission in a specific namespace. In this case change are immediately reflected to the user or set of users associated. 
+e.g. develper role with view, create and delete pods permissions in a specific namespace. In this case change are immediately reflected to the user or set of users associated. 
 
 ### Webhook
+Webhook is an external authorization mechanism outside of kubernetes cluster. Third party tool such as Open Policy Agent can help with admission control and authorization. So you can have kubernetes making API call to the Open Policy Agent with the information about the user and his access requirements. The OPA will then decide if the user should be permited or not.
+### AlwaysAllow / AlwaysDeny
+These authorization modes allows or deny all requests without performing any authorization checks.
+To set authorization mode in kubernetes service config file:
+```
+ExecStart=/usr/local/bin/kube-apiserver \\
+  ...
+  --authorization-mode=Node,RBAC,Webhook
+  ...
+```
