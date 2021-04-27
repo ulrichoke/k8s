@@ -438,6 +438,10 @@ kubectl certificate approve myuser
 kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
 ```
 
+## Organize cluster access with Kubeconfig
+Use kubeconfig files to organize information about clusters, users, namespaces, and authentication mechanisms. The kubectl command-line tool uses kubeconfig files to find the information it needs to choose a cluster and communicate with the API server of a cluster
+### 1. Define clusters, users, and contexts
+
 ## Authorization mechanisms
 ### Node
 Any request comming from user with the name ```system:node:node-name``` and part of the system node group will be handled by the node authorizer.
