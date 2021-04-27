@@ -448,7 +448,21 @@ These files are meant to be update manually for any permission change.
 ### RBAC
 Instead of associating permission to a user RBAC help to easy the management by creating role with a set of permissions.
 e.g. develper role with view, create and delete pods permissions in a specific namespace. In this case change are immediately reflected to the user or set of users associated. 
+```
+$ kubectl apply -f security/developer-role.yaml
+$ kubectl apply -f security/developer-binding.yaml
+$ kubectl get role binding developer
+$ kubectl get rolebinding devuser-developer
+$ kubectl describe role developer
+$ kubectl describe rolebinding devuser-developer
+```
+To check access
+```
+kubectl auth can-i create pods
+kubectl auth can-i delete pods
+kubectl auth can-i create pods --as dev-user
 
+```
 ### Webhook
 Webhook is an external authorization mechanism outside of kubernetes cluster. Third party tool such as Open Policy Agent can help with admission control and authorization. So you can have kubernetes making API call to the Open Policy Agent with the information about the user and his access requirements. The OPA will then decide if the user should be permited or not.
 ### AlwaysAllow / AlwaysDeny
