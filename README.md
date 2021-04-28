@@ -458,8 +458,19 @@ kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.c
 Use kubeconfig files to organize information about clusters, users, namespaces, and authentication mechanisms. The kubectl command-line tool uses kubeconfig files to find the information it needs to choose a cluster and communicate with the API server of a cluster
 
 ### 1. Define clusters, users, and contexts
+Suppose you have two clusters, one for development work and one for scratch work. In the development cluster, your frontend developers work in a namespace called frontend, and your storage developers work in a namespace called storage. In your scratch cluster, developers work in the default namespace, or they create auxiliary namespaces as they see fit. Access to the development cluster requires authentication by certificate. Access to the scratch cluster requires authentication by username and password.
 
+(cf. security/kubeconfig)
 
+### 2. Get kubeconfig
+```
+$ kubectl config --kubeconfig=security/my-kubeconfig view
+```
+
+### 3. Change the current context 
+```
+$ kubectl config --kubeconfig=security/my-kubeconfig use-context exp-scratch
+```
 
 ## Authorization mechanisms
 ### Node
