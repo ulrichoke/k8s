@@ -494,7 +494,7 @@ $ kubectl describe rolebinding devuser-developer
 Imperative commands:
 
 ```
-kubectl create role developer --verb=get --verb=list --verb=watch --resource=pods -o yaml --dry-run > security/developer-role.yaml
+kubectl create role developer --verb=get --verb=list --verb=watch --resource=pods --namespace=blue -o yaml --dry-run > security/developer-role.yaml
 
 kubectl create rolebinding devuser-developer --role=developer --user=dev-user --namespace=blue --output yaml --dry-run > security/developer-binding.yaml
 ```
