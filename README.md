@@ -164,7 +164,7 @@ $ kubectl scale deployment redis-deploy --replicas=2
 - target port: 80
 
 ```
-kubectl run httpd --image=nginx:alpine --expose --port 80
+$ kubectl run httpd --image=nginx:alpine --expose --port 80
 ```
 
 
@@ -269,16 +269,16 @@ First create ConfigMaps, a central place to manage the configuration data in the
 
 ## Imperatively
 ```
-kubectl create configmap configmap-def-1 \
---from-literal=APP1_VAR1="myapp data" \
---from-literal=APP2_VAR2="myapp data2" \
---dry-run -o yaml > configmap-definition.yml
+$ kubectl create configmap configmap-def-1 \
+   --from-literal=APP1_VAR1="myapp data" \
+   --from-literal=APP2_VAR2="myapp data2" \
+   --dry-run -o yaml > configmap-definition.yml
 ```
 ***Or***
 ```
-kubectl create configmap configmap-def-1 \
---from-file=app_config_file \
---dry-run -o yaml > configmap-definition.yml
+$ kubectl create configmap configmap-def-1 \
+   --from-file=app_config_file \
+   --dry-run -o yaml > configmap-definition.yml
 ```
 
 ## Declaratively
@@ -351,7 +351,7 @@ $ helm install --set nfs.server=x.x.x.x --set nfs.path=/exported/path_on_remote_
 To have provisioner deployed on other namespaces aimply edit by:
 
 ```
-kubectl edit deployments.apps nfs-client-provisioner --output yaml > nsf-client-provisionner.yaml
+$ kubectl edit deployments.apps nfs-client-provisioner --output yaml > nsf-client-provisionner.yaml
 ```
 
 And then change the namespace for a new deployment
@@ -363,13 +363,13 @@ And then change the namespace for a new deployment
 # 8. Security
 ## Generate keys and certificate signing request
 ```
-openssl genrsa -out ca.key 2048
-openssl req -new -key ca.key -subj "/CN=KUBERNETES-CA" -out ca.csr
+$ openssl genrsa -out ca.key 2048
+$ openssl req -new -key ca.key -subj "/CN=KUBERNETES-CA" -out ca.csr
 ```
 
 ## Self sign certificates
 ```
-openssl  x509 -req -in ca.csr -signkey ca.key -out ca.crt
+$ openssl  x509 -req -in ca.csr -signkey ca.key -out ca.crt
 ```
 ## Kube admin user certificate
 Create first the admin user key and generate certificate signing request. Then sign with the Kubernetes CA certificate.
@@ -384,14 +384,14 @@ $ openssl x509 -in admin.crt -text -noout
 ```
  Test user certificate
 ```
-curl https://my-kube-server:6443/api/v1/pods \
+$ curl https://my-kube-server:6443/api/v1/pods \
      --key admin.key  \
      --cert admin.crt \
      --cacert ca.crt
 ```
 or
 ```
-kubectl get pods \
+$ kubectl get pods \
     --server my-kube-playground:6443 \
     --client-key admin.key \
     --client-certificate admin.crt \
@@ -401,7 +401,7 @@ kubectl get pods \
 ## Certificate approval using certificateSigningRequest object
 ### 1. Export CSR encoded to environment variable
 ```
-export admin_csr_base64=$(cat admin-key.csr | base64 | tr -d '\n')
+$ export admin_csr_base64=$(cat admin-key.csr | base64 | tr -d '\n')
 ```
 ### 2. Create CSR kubernetes object
  mycsr.yaml 
@@ -450,7 +450,7 @@ kubectl certificate approve myuser
 ### 4. Get the certificate
 
 ```
-kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
+$ kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
 ```
 
 ## Organize cluster access with Kubeconfig
@@ -494,16 +494,16 @@ $ kubectl describe rolebinding devuser-developer
 Imperative commands:
 
 ```
-kubectl create role developer --verb=get --verb=list --verb=watch --resource=pods --namespace=blue -o yaml --dry-run > security/developer-role.yaml
+$ kubectl create role developer --verb=get --verb=list --verb=watch --resource=pods --namespace=blue -o yaml --dry-run > security/developer-role.yaml
 
-kubectl create rolebinding devuser-developer --role=developer --user=dev-user --namespace=blue --output yaml --dry-run > security/developer-binding.yaml
+$ kubectl create rolebinding devuser-developer --role=developer --user=dev-user --namespace=blue --output yaml --dry-run > security/developer-binding.yaml
 ```
 
 To check access
 ```
-kubectl auth can-i create pods
-kubectl auth can-i delete pods
-kubectl auth can-i create pods --as dev-user
+$ kubectl auth can-i create pods
+$ kubectl auth can-i delete pods
+$ kubectl auth can-i create pods --as dev-user
 
 ```
 ### Webhook
