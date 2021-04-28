@@ -382,6 +382,21 @@ $ openssl x509 -req -in admin-key.csr -CA ca.crt -CAkey ca.key -out admin.crt
 ```
 $ openssl x509 -in admin.crt -text -noout
 ```
+ Test user certificate
+```
+curl https://my-kube-server:6443/api/v1/pods \
+     --key admin.key  \
+     --cert admin.crt \
+     --cacert ca.crt
+```
+or
+```
+kubectl get pods \
+    --server my-kube-playground:6443 \
+    --client-key admin.key \
+    --client-certificate admin.crt \
+    --certificate-authority ca.crt 
+```
 
 ## Certificate approval using certificateSigningRequest object
 ### 1. Export CSR encoded to environment variable
@@ -439,8 +454,12 @@ kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.c
 ```
 
 ## Organize cluster access with Kubeconfig
+
 Use kubeconfig files to organize information about clusters, users, namespaces, and authentication mechanisms. The kubectl command-line tool uses kubeconfig files to find the information it needs to choose a cluster and communicate with the API server of a cluster
+
 ### 1. Define clusters, users, and contexts
+
+
 
 ## Authorization mechanisms
 ### Node
