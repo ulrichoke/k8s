@@ -490,6 +490,15 @@ $ kubectl get rolebinding devuser-developer
 $ kubectl describe role developer
 $ kubectl describe rolebinding devuser-developer
 ```
+
+Imperative commands:
+
+```
+kubectl create role pod-reader --verb=get --verb=list --verb=watch --resource=pods -o yaml --dry-run > security/developer-role.yaml
+
+kubectl create rolebinding devuser-developer --role=developer --user=dev-user --namespace=blue --output yaml --dry-run > security/developer-binding.yaml
+```
+
 To check access
 ```
 kubectl auth can-i create pods
