@@ -459,7 +459,8 @@ Use kubeconfig files to organize information about clusters, users, namespaces, 
 
 ### 1. Define clusters, users, and contexts
 Suppose you have two clusters, one for development work and one for scratch work. In the development cluster, your frontend developers work in a namespace called frontend, and your storage developers work in a namespace called storage. In your scratch cluster, developers work in the default namespace, or they create auxiliary namespaces as they see fit. Access to the development cluster requires authentication by certificate. Access to the scratch cluster requires authentication by username and password.
-cf. security/kubeconfig
+
+(cf. security/kubeconfig)
 
 ### 2. Get kubeconfig
 ```
