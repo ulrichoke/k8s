@@ -511,7 +511,7 @@ $ kubectl auth can-i create pods --as dev-user
 _Role and RoleBinding kubernetes object are limited to namespaces. ClusterRole are just like except they are for cluster scope resources._
 
 ```
-$ kubectl create clusterrole cluster-administrator --verb=get --verb=list --verb=delete --verb=create --resource=nodes -o yaml --dry-run > k8s/security/admin-clusterrole.yaml
+$ kubectl create clusterrole cluster-administrator --verb=get --verb=list --verb=delete --verb=create --resource=nodes -o yaml --dry-run > security/admin-clusterrole.yaml
 
 $ kubectl create clusterrolebinding adminuser-clusteradmin --clusterrole=cluster-administrator --user=admin-user --output yaml --dry-run > security/admin-clusterrolebinding.yaml
 ```
