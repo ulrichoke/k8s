@@ -506,6 +506,18 @@ $ kubectl auth can-i delete pods
 $ kubectl auth can-i create pods --as dev-user
 
 ```
+
+**Note :**
+_Role and RoleBinding kubernetes object are limited to namespaces. ClusterRole are just like except they are for cluster scope resources._
+
+```
+$ kubectl create clusterrole cluster-administrator --verb=get --verb=list --verb=delete --verb=create --resource=nodes -o yaml --dry-run > k8s/security/admin-clusterrole.yaml
+
+$ kubectl create clusterrolebinding adminuser-clusteradmin --clusterrole=cluster-administrator --user=admin-user --output yaml --dry-run > security/admin-clusterrolebinding.yaml
+```
+
+
+
 ### Webhook
 Webhook is an external authorization mechanism outside of kubernetes cluster. Third party tool such as Open Policy Agent can help with admission control and authorization. So you can have kubernetes making API call to the Open Policy Agent with the information about the user and his access requirements. The OPA will then decide if the user should be permited or not.
 ### AlwaysAllow / AlwaysDeny
