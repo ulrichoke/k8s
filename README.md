@@ -512,8 +512,10 @@ _Role and RoleBinding kubernetes object are limited to namespaces. ClusterRole a
 
 ```
 $ kubectl create clusterrole cluster-administrator --verb=get --verb=list --verb=delete --verb=create --resource=nodes -o yaml --dry-run > security/admin-clusterrole.yaml
+$ kubectl create clusterrole storage-administrator --verb=get --verb=list --verb=delete --verb=create --resource=pv,pvc -o yaml --dry-run > security/storage-clusterrole.yaml
 
 $ kubectl create clusterrolebinding adminuser-clusteradmin --clusterrole=cluster-administrator --user=admin-user --output yaml --dry-run > security/admin-clusterrolebinding.yaml
+$ kubectl create clusterrolebinding storage-clusteradmin --clusterrole=cluster-administrator --user=storage-administrator --output yaml --dry-run > security/storage-clusterrolebinding.yaml
 ```
 
 
