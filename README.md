@@ -473,13 +473,13 @@ $ kubectl config --kubeconfig=security/my-kubeconfig use-context exp-scratch
 ```
 
 ## Authorization mechanisms
-### Node
+### 1. Node
 Any request comming from user with the name ```system:node:node-name``` and part of the system node group will be handled by the node authorizer.
 ### ABAC
 Attribute Based Access Control is an external authorization where a user or a group of users are associated with a set of permissions (view, create, delete pods ...). So you need to create a **policy definition** file for each set of permissions.
 These files are meant to be update manually for any permission change.
 
-### RBAC
+### 2. RBAC
 Instead of associating permission to a user RBAC help to easy the management by creating role with a set of permissions.
 e.g. develper role with view, create and delete pods permissions in a specific namespace. In this case change are immediately reflected to the user or set of users associated. 
 ```
@@ -523,7 +523,7 @@ To list all available cluster scope resources:
 $ kubectl api-resources --namespaced=false
 ```
 
-### Webhook
+### 3. Webhook
 Webhook is an external authorization mechanism outside of kubernetes cluster. Third party tool such as Open Policy Agent can help with admission control and authorization. So you can have kubernetes making API call to the Open Policy Agent with the information about the user and his access requirements. The OPA will then decide if the user should be permited or not.
 ### AlwaysAllow / AlwaysDeny
 These authorization modes allows or deny all requests without performing any authorization checks.
@@ -533,4 +533,28 @@ ExecStart=/usr/local/bin/kube-apiserver \\
   ...
   --authorization-mode=Node,RBAC,Webhook
   ...
+```
+### 4. Image security
+Implementing docker registry authentication
+``` 
+$ kubectl create secret docker-registry regcred \
+   --docker-server=private-registry.io \
+   --docker-username=registry-user \
+   --docker-password=registry-pass \
+   --docker-email=registry-user@domain.org
+```
+
+```docker-registry``` is a builting secret type for docker credentials storing.
+
+### 5. Security context
+Docker security options can be set through k8s pods or deployments at pod or containers level. 
+
+**Capabilities are only supported at containers level**
+
+```
+...
+spec
+  securityContext:
+     runAsUser: 1000
+...
 ```
