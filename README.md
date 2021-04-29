@@ -518,7 +518,10 @@ $ kubectl create clusterrolebinding adminuser-clusteradmin --clusterrole=cluster
 $ kubectl create clusterrolebinding storage-clusteradmin --clusterrole=cluster-administrator --user=storage-administrator --output yaml --dry-run > security/storage-clusterrolebinding.yaml
 ```
 
-
+To list all available cluster scope resources:
+```
+$ kubectl api-resources --namespaced=false
+```
 
 ### Webhook
 Webhook is an external authorization mechanism outside of kubernetes cluster. Third party tool such as Open Policy Agent can help with admission control and authorization. So you can have kubernetes making API call to the Open Policy Agent with the information about the user and his access requirements. The OPA will then decide if the user should be permited or not.
