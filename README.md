@@ -542,6 +542,8 @@ $ kubectl create secret docker-registry regcred \
    --docker-username=registry-user \
    --docker-password=registry-pass \
    --docker-email=registry-user@domain.org
+   
+$ kubectl apply -f security/private-registry.yaml   
 ```
 
 ```docker-registry``` is a builting secret type for docker credentials storing.
