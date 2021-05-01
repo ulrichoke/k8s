@@ -541,9 +541,21 @@ $ kubectl create secret docker-registry regcred \
    --docker-server=private-registry.io \
    --docker-username=registry-user \
    --docker-password=registry-pass \
-   --docker-email=registry-user@domain.org
-   
-$ kubectl apply -f security/private-registry.yaml   
+   --docker-email=registry-user@domain.org   
+```
+
+Use ```ìmagePullSecret``` at spec level to apply the secret.
+
+```
+...
+imagePullSecrets: 
+  - name: registry-secrets
+...
+```
+Then create the pods with the resulting definition file.
+
+```
+$ kubectl apply -f security/private-registry.yaml
 ```
 
 ```docker-registry``` is a builting secret type for docker credentials storing.
@@ -560,3 +572,11 @@ spec
      runAsUser: 1000
 ...
 ```
+
+### 6. Network Policy
+Use NetworkPolicy objet and link it to the pods with ```podSelector``` to set incoming or outgoing traffic limitations (ingress/egress).
+At the time of this writing the compatible network solutions are:
+- Kube-router
+- Calico
+- Romana
+- Weave-net
