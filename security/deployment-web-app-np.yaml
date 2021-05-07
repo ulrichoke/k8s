@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    type: webapp
+  name: nginx-app
+  namespace: prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webapp-prod
+  template:
+    metadata:
+      labels:
+        app: webapp-prod
+        type: webapp
+    spec:
+      containers:
+      - image: nginx
+        name: nginx

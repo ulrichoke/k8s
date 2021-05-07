@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: http-network-policy
+  namespace: prod
+spec:
+  podSelector:
+    matchLabels:
+      type: db-cache
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: prod    # traffic flowing in production namespace 
+      podSelector:      # Notice '-' note used => 'AND' pod is webapp
+        matchLabels:
+          type: webapp  
+    ports:
+    - protocol: TCP
+      port: 6379
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 192.168.170.3/32  # external backup server
+    ports:
+    - protocol: TCP
+      port: 8086
