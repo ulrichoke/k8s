@@ -593,3 +593,25 @@ At the time of this writing the compatible network solutions are:
 - Calico
 - Romana
 - Weave-net
+
+# 16. CNI
+## a. Container Network Interface plugin
+
+Where are located cni plugins (default ```/opt/cni/bin```)
+```
+$ ps aux | grep kubelet | grep network-plugin
+```
+Find the cni configuration dir (default ```/etc/cni/net.d/```)
+```
+$ ps aux | grep kubelet | grep cni-conf-dir
+```
+
+## b. Deploy Weave plugin
+
+```
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+kubectl logs weave-net-xxxxx weave –n kube-system
+```
+
+
+```
