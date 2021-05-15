@@ -85,22 +85,22 @@ kubectl run static-pod --image=busybox --output yaml --dry-run=client --restart=
 kubectl create deployment mydeployment --image=nginx --dry-run=true -o yaml > deployment-definition-1.yml
 ```
 
-# 3. Imperative commands
-## Create deployment
+## Create deployment with Imperative commands
 ```
 $ kubectl create deploy webapp --image=nginx:alpine --replicas=3
 ```
-## Create NodePort to expose pods
+# 3. Expose pods sith imperative commands
 
-- deployment: webapp-deploy
-- pod: webapp-svc
+Example:
+- deployment : webapp-deploy
+- pod: webapp-deploy
 - type: NodePort
 - targetPort (cluster port): 8080
 - port (deployment port): 8080
 - nodePort: 30080
 - selector: front-end 
 ```
-$ kubectl expose deployment webapp --name=webapp-svc --type=NodePort --target-port=8080 --port=8080 --dry-run -o yaml > svc.yml
+$ kubectl expose deployment webapp-deploy --name=webapp-svc --type=NodePort --target-port=8080 --port=8080 --dry-run -o yaml > svc.yml
 $ vi svc.yml
 ---
 apiVersion: v1
@@ -124,7 +124,20 @@ $ kubectl create -f svc.yml
 
 ```
 
-## Create ClusterIP service
+# 4. Create ClusterIP service
+
+## Set clusterIP ip range in service configuration (default 10.0.0.0/24)
+
+```
+kube-apiserver --service-cluster-ip-range=your_custom_ip_cidr 
+```
+
+to check:
+
+```
+$ ps aux | grep cluster-ip
+```
+
 - targetPort and port: 6379
 ```
 $ kubectl create service clusterip redis-service --tcp=6379:6379 --dry-run=client -o yaml > clusterip-svc.yml
@@ -132,22 +145,22 @@ $ kubectl create -f clusterip-svc.yml
 ```
 
 
-## Create ClusterIP service to expose redis pod on cluster port 6379
+# 5. Create ClusterIP service to expose redis pod on cluster port 6379
 
 ```
 $ kubectl expose pod --name=redis-service redis --port 6379
 ```
 
-## Create a new pod called my-nginx with nginx image and expose it on container port 8080
+# 6. Create a new pod called my-nginx with nginx image and expose it on container port 8080
 ```
 $ kubectl run my-nginx --image=nginx --port=8080
 ```
-## Create namespace dev
+# 7. Create namespace dev
 ```
 $ kubectl create ns dev
 ```
 
-## Create a new deployment called redis-deploy
+# 8. Create a new deployment called redis-deploy
 
 - namespace= dev 
 - image= redis
@@ -157,7 +170,7 @@ $ kubectl create deployment redis-deploy --image=redis --namespace=dev
 $ kubectl scale deployment redis-deploy --replicas=2
 ```
 
-## Create a pod and service in a few steps
+# 9. Create a pod and service in a few steps
 
 - image: nginx:alpine 
 - service type: ClusterIP
@@ -168,7 +181,7 @@ $ kubectl run httpd --image=nginx:alpine --expose --port 80
 ```
 
 
-# 4. Scheduling
+# 10. Scheduling
 
 ## Command tips
 
@@ -201,7 +214,7 @@ e.g.
 $ kubectl taint node node1 deployment=green:PreferNoSchedule-
 ```
 
-# 5. Rollout and Versioning
+# 11. Rollout and Versioning
 ## Rollout
 Every first deployment will result in triggering a rollout. A new rollout create a new deployment revision.
 ### Rollout status
@@ -262,7 +275,7 @@ REVISION  CHANGE-CAUSE
 3         <none>
 ```
 
-# 5. ConfigMaps
+# 12. ConfigMaps
 Use of ConfigMaps is the best way of managing containers variables or environment data in a kubernetes cluster (within pod definition files).
 
 First create ConfigMaps, a central place to manage the configuration data in the form of key-value pairs. Then reference variables in the pod files.
@@ -293,7 +306,7 @@ metadata:
   name: configmap-def-1
 ```
 
-# 6. Secrets
+# 13. Secrets
 Same logic as configMap to define and store secrets.
 
 ## Declaratively
@@ -316,7 +329,7 @@ echo -n "pa55w0rd" | base64
 echo -n "cGE1NXcwcmQ=" | base64 --decode
 ```
 
-# 7. Storage
+# 14. Storage
 ## Storage drivers
 They help manage volumes on images and containers.
 Examples: AUFS | ZFS | BTRS | DEVICE MAPPER | OVERLAY
@@ -360,18 +373,18 @@ And then change the namespace for a new deployment
 
 [How to Setup Dynamic NFS Provisioning Server For Kubernetes](https://redblink.com/setup-nfs-server-provisioner-kubernetes/).
 
-# 8. Security
-## Generate keys and certificate signing request
+# 15. Security
+## a. Generate keys and certificate signing request
 ```
 $ openssl genrsa -out ca.key 2048
 $ openssl req -new -key ca.key -subj "/CN=KUBERNETES-CA" -out ca.csr
 ```
 
-## Self sign certificates
+## b. Self sign certificates
 ```
 $ openssl  x509 -req -in ca.csr -signkey ca.key -out ca.crt
 ```
-## Kube admin user certificate
+## c. Kube admin user certificate
 Create first the admin user key and generate certificate signing request. Then sign with the Kubernetes CA certificate.
 ```
 $ openssl genrsa -out admin-key.key 2048
@@ -398,12 +411,12 @@ $ kubectl get pods \
     --certificate-authority ca.crt 
 ```
 
-## Certificate approval using certificateSigningRequest object
-### 1. Export CSR encoded to environment variable
+## d. Certificate approval using certificateSigningRequest object
+### 15.d.1. Export CSR encoded to environment variable
 ```
 $ export admin_csr_base64=$(cat admin-key.csr | base64 | tr -d '\n')
 ```
-### 2. Create CSR kubernetes object
+### 15.d.2. Create CSR kubernetes object
  mycsr.yaml 
 ```
 ---
@@ -442,44 +455,44 @@ spec:
 ```
 cat mycsr.yaml | envsubst | kubectl apply -f -
 ```
-### 3. Sign the certificate
+### 15.d.3. Sign the certificate
 ```
 kubectl certificate approve myuser
 ```
 
-### 4. Get the certificate
+### 15.d.4. Get the certificate
 
 ```
 $ kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
 ```
 
-## Organize cluster access with Kubeconfig
+## e. Organize cluster access with Kubeconfig
 
 Use kubeconfig files to organize information about clusters, users, namespaces, and authentication mechanisms. The kubectl command-line tool uses kubeconfig files to find the information it needs to choose a cluster and communicate with the API server of a cluster
 
-### 1. Define clusters, users, and contexts
+### 15.e.1. Define clusters, users, and contexts
 Suppose you have two clusters, one for development work and one for scratch work. In the development cluster, your frontend developers work in a namespace called frontend, and your storage developers work in a namespace called storage. In your scratch cluster, developers work in the default namespace, or they create auxiliary namespaces as they see fit. Access to the development cluster requires authentication by certificate. Access to the scratch cluster requires authentication by username and password.
 
 (cf. security/kubeconfig)
 
-### 2. Get kubeconfig
+### 15.e.2. Get kubeconfig
 ```
 $ kubectl config --kubeconfig=security/my-kubeconfig view
 ```
 
-### 3. Change the current context 
+### 15.e.3. Change the current context 
 ```
 $ kubectl config --kubeconfig=security/my-kubeconfig use-context exp-scratch
 ```
 
-## Authorization mechanisms
-### 1. Node
+## f. Authorization mechanisms
+### 15.f.1. Node
 Any request comming from user with the name ```system:node:node-name``` and part of the system node group will be handled by the node authorizer.
-### ABAC
+### 15.f.2. ABAC
 Attribute Based Access Control is an external authorization where a user or a group of users are associated with a set of permissions (view, create, delete pods ...). So you need to create a **policy definition** file for each set of permissions.
 These files are meant to be update manually for any permission change.
 
-### 2. RBAC
+### 15.f.3. RBAC
 Instead of associating permission to a user RBAC help to easy the management by creating role with a set of permissions.
 e.g. develper role with view, create and delete pods permissions in a specific namespace. In this case change are immediately reflected to the user or set of users associated. 
 ```
@@ -523,7 +536,7 @@ To list all available cluster scope resources:
 $ kubectl api-resources --namespaced=false
 ```
 
-### 3. Webhook
+### 15.f.4. Webhook
 Webhook is an external authorization mechanism outside of kubernetes cluster. Third party tool such as Open Policy Agent can help with admission control and authorization. So you can have kubernetes making API call to the Open Policy Agent with the information about the user and his access requirements. The OPA will then decide if the user should be permited or not.
 ### AlwaysAllow / AlwaysDeny
 These authorization modes allows or deny all requests without performing any authorization checks.
@@ -534,7 +547,7 @@ ExecStart=/usr/local/bin/kube-apiserver \\
   --authorization-mode=Node,RBAC,Webhook
   ...
 ```
-### 4. Image security
+### 15.f.5. Image security
 Implementing docker registry authentication
 ``` 
 $ kubectl create secret docker-registry regcred \
@@ -560,7 +573,7 @@ $ kubectl apply -f security/private-registry.yaml
 
 ```docker-registry``` is a builting secret type for docker credentials storing.
 
-### 5. Security context
+### 15.f.6. Security context
 Docker security options can be set through k8s pods or deployments at pod or containers level. 
 
 **Capabilities are only supported at containers level**
@@ -573,7 +586,7 @@ spec
 ...
 ```
 
-### 6. Network Policy
+### 15.f.7. Network Policy
 Use NetworkPolicy objet and link it to the pods with ```podSelector``` to set incoming or outgoing traffic limitations (ingress/egress).
 At the time of this writing the compatible network solutions are:
 - Kube-router
