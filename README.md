@@ -85,11 +85,11 @@ kubectl run static-pod --image=busybox --output yaml --dry-run=client --restart=
 kubectl create deployment mydeployment --image=nginx --dry-run=true -o yaml > deployment-definition-1.yml
 ```
 
-## Create deployment with Imperative commands
+## Create deployment with Imperative command
 ```
 $ kubectl create deploy webapp --image=nginx:alpine --replicas=3
 ```
-# 3. Expose pods sith imperative commands
+# 3. Expose pods with imperative command
 
 Example:
 - deployment : webapp-deploy
@@ -101,7 +101,7 @@ Example:
 - selector: front-end 
 ```
 $ kubectl expose deployment webapp-deploy --name=webapp-svc --type=NodePort --target-port=8080 --port=8080 --dry-run -o yaml > svc.yml
-$ vi svc.yml
+$ cat svc.yml
 ---
 apiVersion: v1
 kind: Service
