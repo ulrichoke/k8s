@@ -67,6 +67,12 @@ Look at kubelet configuration file (kubeconfig.yaml _kubernetes the hard way set
 ```
 staticPodPath: /etc/kubernetes/manifests
 ```
+or 
+```
+kubectl proxy
+curl "http://localhost:8001/api/v1/nodes/node1/proxy/configz" | python -m json.tool | grep PodPath
+```
+
 Use the following command to find the config file location in the cluster:
 
 ```
