@@ -34,19 +34,19 @@ source /usr/share/bash-completion/bash_completion
  Source the completion script in your ~/.bashrc file:
 
 ```
-echo 'source <(kubectl completion bash)' >>~/.bashrc
+$ echo 'source <(kubectl completion bash)' >>~/.bashrc
 ```
 
 If you have an alias for kubectl, you can extend shell completion to work with that alias:
 
 ```
-echo 'alias k=kubectl' >>~/.bashrc
-echo 'complete -F __start_kubectl k' >>~/.bashrc
+$ echo 'alias k=kubectl' >>~/.bashrc
+$ echo 'complete -F __start_kubectl k' >>~/.bashrc
 ```
 
 # 1. POD definition
 ## Generate a pod YAML file
-```kubectl run nginx --image=nginx --dry-run -o yaml > pod-definition.yaml```
+```$ kubectl run nginx --image=nginx --dry-run -o yaml > pod-definition.yaml```
 
 ## Static POD
 Static are defined by a manifest file. They run on independant worker node and not managed through the kube-apiserver.
@@ -67,10 +67,11 @@ Look at kubelet configuration file (kubeconfig.yaml _kubernetes the hard way set
 ```
 staticPodPath: /etc/kubernetes/manifests
 ```
-or 
+or get it through API
+
 ```
-kubectl proxy
-curl "http://localhost:8001/api/v1/nodes/node1/proxy/configz" | python -m json.tool | grep PodPath
+$ kubectl proxy
+$ curl "http://localhost:8001/api/v1/nodes/node1/proxy/configz" | python -m json.tool | grep PodPath
 ```
 
 Use the following command to find the config file location in the cluster:
@@ -83,13 +84,13 @@ Note: this type of pod when created has its name suffixed with the node name on 
 
 Example: 
 ```
-kubectl run static-pod --image=busybox --output yaml --dry-run=client --restart=Never  --command -- sleep 1000 >  /etc/kubernetes/manifests/static-pod-1.yaml
+$ kubectl run static-pod --image=busybox --output yaml --dry-run=client --restart=Never  --command -- sleep 1000 >  /etc/kubernetes/manifests/static-pod-1.yaml
 ```
 
 # 2. DEPLOYMENT definition
 ## Generate a deployment YAML file 
 ```
-kubectl create deployment mydeployment --image=nginx --dry-run=true -o yaml > deployment-definition-1.yml
+$ kubectl create deployment mydeployment --image=nginx --dry-run=true -o yaml > deployment-definition-1.yml
 ```
 
 ## Create deployment with Imperative command
