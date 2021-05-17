@@ -55,14 +55,15 @@ Two ways for its definition:
 - In the standard manifests folder:
 Create pod YAML file inside  ```/etc/kubernetes/manifests ```
 
-- In a custom path as a kubelet.service configuration option: 
+- In a custom path as defined through kubelet.service configuration options: 
 ```
 Exec-Start=/usr/bin/local/kubelet \\
 ....
   --config = kubeconfig.yaml \\
 ....
 ```
-kubeconfig.yaml
+
+Look at kubelet configuration file (kubeconfig.yaml _kubernetes the hard way setup case_) to find manifest full path:
 ```
 staticPodPath: /etc/kubernetes/manifests
 ```
@@ -183,6 +184,29 @@ $ kubectl run httpd --image=nginx:alpine --expose --port 80
 
 # 10. Scheduling
 
+## Using label selectors 
+
+Create node labels
+```
+kubectl label nodes node2 disk=hdd
+kubectl describe nodes node2 | grep -A6 Labels
+```
+
+Generate pod defintion file
+```
+kubectl run --image=nginx nginx --generator=run-pod/v1  --dry-run -o yaml > nginx.yaml
+```
+
+Edit and set _nodeSelector_ in _spec_  to schedule pod with definition file:
+```
+spec:
+  ...
+    nodeSelector:
+        disk: hdd
+
+  ...
+```
+
 ## Command tips
 
 To check the options that could be used for tolerations for e.g:
@@ -191,16 +215,24 @@ To check the options that could be used for tolerations for e.g:
 $ kubectl explain pod --recursive | grep -A5 tolerations
 ```
 
+
 To remove a node label:
 
 ```
 $ kubectl label node nodename labelkey-
 ```
 
+To set deployment ressources
+
+```
+kubectl set resources deployment nginx --requests=cpu=0.1,memory=1Gi 
+
+```
+
 
 ## Set a taint on a node
 ```
-$ kubectl taint node mynode-name key=value:taint-effect
+$ kubectl taint node mynode-name key=value:[ taint-effect ]
 ``` 
 **taint-effect** possible value: NoSchedule | PreferNoSchedule | NoExecute
 
