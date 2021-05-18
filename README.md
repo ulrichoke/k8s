@@ -163,19 +163,19 @@ $ kubectl expose pod --name=redis-service redis --port 6379
 ```
 $ kubectl run my-nginx --image=nginx --port=8080
 ```
-# 7. Create namespace dev
+# 7. Create namespace dev 
 ```
 $ kubectl create ns dev
 ```
 
-Access a pod in a specific namespace 
+To access a pod in a specific namespace 
 
 ```
 [ xx-xx-xx-xx ].dev.pod.cluster.local
 ```
 XX -> ip octets.
 
-Access a service cluster in a specific namespace 
+To access a service cluster in a specific namespace 
 
 ```
 [ my-service-name ].dev.svc.cluster.local
