@@ -658,7 +658,4 @@ To check the weave ip allocation range:
 ```
 kubectl logs weave-net-xxxxx weave –n kube-system | grep ipalloc-range
 ```
-To check the service cluster ip range:
-```
-grep cluster-ip-range /etc/kubernetes/manifests/kube-apiserver.yaml
-```
+
