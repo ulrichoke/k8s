@@ -168,12 +168,12 @@ $ kubectl run my-nginx --image=nginx --port=8080
 $ kubectl create ns dev
 ```
 
-Access a pod in a specific namespace through its IP
+Access a pod in a specific namespace 
 
 ```
 [ pod_IP ].dev.pod.cluster.local
 ```
-Access a service cluster in a specific namespace through its name
+Access a service cluster in a specific namespace 
 
 ```
 [ my-service-name ].dev.pod.cluster.local
