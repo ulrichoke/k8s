@@ -168,11 +168,17 @@ $ kubectl run my-nginx --image=nginx --port=8080
 $ kubectl create ns dev
 ```
 
-Access a pod in a specific namespace through its name
+Access a pod in a specific namespace through its IP
 
 ```
-mydb-pod.dev.svc.cluster.local
+[ pod_IP ].dev.pod.cluster.local
 ```
+Access a service cluster in a specific namespace through its name
+
+```
+[ my-service-name ].dev.pod.cluster.local
+```
+
 # 8. Create a new deployment called redis-deploy
 
 - namespace= dev 
