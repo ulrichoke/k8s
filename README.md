@@ -178,7 +178,7 @@ XX -> ip octets.
 Access a service cluster in a specific namespace 
 
 ```
-[ my-service-name ].dev.pod.cluster.local
+[ my-service-name ].dev.svc.cluster.local
 ```
 
 # 8. Create a new deployment called redis-deploy
