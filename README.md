@@ -171,8 +171,10 @@ $ kubectl create ns dev
 Access a pod in a specific namespace 
 
 ```
-[ pod_IP ].dev.pod.cluster.local
+[ xx-xx-xx-xx ].dev.pod.cluster.local
 ```
+XX -> ip octets.
+
 Access a service cluster in a specific namespace 
 
 ```
