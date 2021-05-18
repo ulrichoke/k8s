@@ -652,7 +652,8 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 kubectl logs weave-net-xxxxx weave –n kube-system
 ```
 
-☑️_Tips_
+☑️ _Tips_
+
 To check the weave ip allocation range:
 ```
 kubectl logs weave-net-xxxxx weave –n kube-system | grep ipalloc-range
