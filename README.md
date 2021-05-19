@@ -134,17 +134,7 @@ $ kubectl create -f svc.yml
 
 # 4. Create ClusterIP service
 
-## Set clusterIP ip range in service configuration (default 10.0.0.0/24)
-
-```
-kube-apiserver --service-cluster-ip-range=your_custom_ip_cidr 
-```
-
-to check:
-
-```
-$ ps aux | grep cluster-ip
-```
+_kubelet_ handle networking through kube-proxy (daemonset) component. ClusterIP service is a cluster wide concept and a virtual object that doesn't realy exist like a service.
 
 - targetPort and port: 6379
 ```
@@ -152,12 +142,38 @@ $ kubectl create service clusterip redis-service --tcp=6379:6379 --dry-run=clien
 $ kubectl create -f clusterip-svc.yml
 ```
 
+## Set clusterIP ip range in service configuration (default 10.0.0.0/24)
 
-# 5. Create ClusterIP service to expose redis pod on cluster port 6379
+_Custom clusterIP range configuration_ 
+
+```
+kube-apiserver --service-cluster-ip-range=[ your_custom_ip_cidr ]...
+```
+
+_Custom NodePort range configuration_ 
+
+```
+kube-apiserver --service-node-port-range=[ your-node-port-range ]
+```
+
+## To check the clusterip range:
+
+```
+$ ps aux | grep cluster-ip
+```
+
+## To look for proxy mode:
+
+kubectl logs -n kube-system kube-proxy-xxxxx -c kube-proxy | grep mode
+
+
+
+# 5. Create ClusterIP service to expose redis pod on cluster port 6379 
 
 ```
 $ kubectl expose pod --name=redis-service redis --port 6379
 ```
+
 
 # 6. Create a new pod called my-nginx with nginx image and expose it on container port 8080
 ```
