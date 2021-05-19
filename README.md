@@ -176,7 +176,7 @@ $ kubectl expose pod --name=redis-service redis --port 6379
 ```
 
 
-# 6. Create a new pod called my-nginx with nginx image and expose it on container port 8080
+# 6. Create a new pod _my-nginx_ with _nginx_ image and expose it on container port 8080
 ```
 $ kubectl run my-nginx --image=nginx --port=8080
 ```
@@ -198,7 +198,7 @@ To access a service cluster in a specific namespace
 [ my-service-name ].dev.svc.cluster.local
 ```
 
-# 8. Create a new deployment called redis-deploy
+# 8. Create a new deployment _redis-deploy_
 
 - namespace= dev 
 - image= redis
