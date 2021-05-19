@@ -737,7 +737,7 @@ kubectl -n kube-system describe deployments.apps coredns | grep -A2 Args | grep 
 
 Refer to _coredns and kubelet-config-1.XX_ configmap objects to make change to the coredns component.
 
-- Name of the service created for accessing CoreDNS (default is kube-dns:
+- Name of the service created for accessing CoreDNS (default is kube-dns):
 ```
 $ kubectl get service -n kube-system
 ```
