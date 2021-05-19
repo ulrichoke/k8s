@@ -689,3 +689,55 @@ To check the weave ip allocation range:
 kubectl logs weave-net-xxxxx weave –n kube-system | grep ipalloc-range
 ```
 
+# 17. DNS
+
+Name resolution is base on mapping service name and its IP address.
+By default the cluster root domain is ```cluster.local``` 
+[ Hostname ].[ Namespace ].[ Type ].[ root domain ]
+
+e.g: 
+
+db-service.dev.svc.cluster.local
+
+DNS records for pods are not explicitily enabled by default.
+
+## DNS service in K8s
+- Old k8s installation: kube-dns
+- k8s > 1.12 : coreDNS
+
+CoreDNS configuration file located at ``` /etc/coredns/Corefile ``` (by default) contains plugin directives:
+
+
+e.g.:
+```
+.:53 {
+  errors
+  health
+  kubernetes cluster.local in-addr.arpa ip6.arpa {
+    pods insecure
+    upstream
+    fallthrough in-addr.arpa ip6.arpa
+    
+  }
+  prometheus :9153
+  proxy . /etc/resolv.conf
+  cache 30
+  reload
+  
+}
+```
+
+``` kubernetes ``` : where the core domain name is setup (default cluster.local)
+``` pods insecure ``` : enable pod name records
+
+- Get corefile location
+```
+kubectl -n kube-system describe deployments.apps coredns | grep -A2 Args | grep Corefile
+```
+
+Refer to _coredns and kubelet-config-1.XX_ configmap objects to make change to the coredns component.
+
+- Name of the service created for accessing CoreDNS (default is kube-dns:
+```
+$ kubectl get service -n kube-system
+```
