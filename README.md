@@ -164,8 +164,9 @@ $ ps aux | grep cluster-ip
 
 ## To look for proxy mode:
 
+```
 kubectl logs -n kube-system kube-proxy-xxxxx -c kube-proxy | grep mode
-
+```
 
 
 # 5. Create ClusterIP service to expose redis pod on cluster port 6379 
