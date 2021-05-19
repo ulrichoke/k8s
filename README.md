@@ -147,13 +147,13 @@ $ kubectl create -f clusterip-svc.yml
 _Custom clusterIP range configuration_ 
 
 ```
-kube-apiserver --service-cluster-ip-range=[ your_custom_ip_cidr ]...
+kube-apiserver --service-cluster-ip-range=[ your_custom_ip_cidr ] ...
 ```
 
 _Custom NodePort range configuration_ 
 
 ```
-kube-apiserver --service-node-port-range=[ your-node-port-range ]
+kube-apiserver --service-node-port-range=[ your-node-port-range ] ...
 ```
 
 ## To check the clusterip range:
