@@ -97,7 +97,7 @@ $ kubectl create deployment mydeployment --image=nginx --dry-run=true -o yaml > 
 ```
 $ kubectl create deploy webapp --image=nginx:alpine --replicas=3
 ```
-# 3. Expose pods with imperative command
+# 3. Expose pods with imperative command _(Service type NodePort)_
 
 Example:
 - deployment : webapp-deploy
@@ -132,7 +132,7 @@ $ kubectl create -f svc.yml
 
 ```
 
-# 4. Create ClusterIP service
+# 4. Create ClusterIP service _(Service type ClusterIP)_
 
 _kubelet_ handle networking through kube-proxy (daemonset) component. ClusterIP service is a cluster wide concept and a virtual object that doesn't realy exist like a service.
 
