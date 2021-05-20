@@ -758,3 +758,9 @@ The ingress controllers have additional intelligence to monitor cluster and conf
 - Service definition to link to the deployment
 - ConfigMap for configuration
 - ServiceAccount to set right permissions and authentication + Roles, ClusterRole and RoleBinding.
+
+## Ingress resource:
+### @ Rules:
+- Route traffic based on domain name
+- Route traffic based on url path
+- Route all traffic to a specific pod 
