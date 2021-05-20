@@ -750,4 +750,5 @@ INGRESS = single layer 7 loadbalancer builtin to the k8s cluster
 ## Setup process:
 - Deploy: selecting an ingress controller (Nginx proxy, HAProxy, traefik, lstio, GCP HTTP LB, ...)
 - Configure: configure ingress resources (url route and rules, ssl certificate, ...)
- 
+
+The ingress controllers have additional intelligence to monitor cluster and configure the nginx server when something is changed (like domain name, rules, ...). This will require a ___ServiceAccount___ objet to do so. The configuration parameters (timeout, keep-alive, err-log-path, ssl-protocols, ...)  are set by using a ___ConfigMap___ object.
