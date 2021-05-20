@@ -757,4 +757,4 @@ The ingress controllers have additional intelligence to monitor cluster and conf
 - Deployment definition
 - Service definition to link to the deployment
 - ConfigMap for configuration
-- Auth to set right permissions.
+- ServiceAccount to set right permissions and authentication.
