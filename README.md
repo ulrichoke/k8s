@@ -741,3 +741,13 @@ Refer to _coredns and kubelet-config-1.XX_ configmap objects to make change to t
 ```
 $ kubectl get service -n kube-system
 ```
+# 18. INGRESS
+
+Ingress help to access k8s applications through a single externaly accessible url and route to different services within the cluster base on url path alongside with the security setup.
+
+INGRESS = single layer 7 loadbalancer builtin to the k8s cluster
+
+## Setup process:
+- Deploy: selecting an ingress controller (Nginx proxy, HAProxy, traefik, lstio, GCP HTTP LB, ...)
+- Configure: configure ingress resources (url route and rules, ssl certificate, ...)
+ 
