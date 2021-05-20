@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-documentation
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /book
+        backend:
+          serviceName: book-service
+          servicePort: 80
+      - path: /video
+        backend:
+          serviceName: video-service
+          servicePort: 80
+
