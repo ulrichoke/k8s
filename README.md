@@ -753,8 +753,8 @@ INGRESS = single layer 7 loadbalancer builtin to the k8s cluster
 
 The ingress controllers have additional intelligence to monitor cluster and configure the nginx server when something is changed (like domain name, rules, ...). This will require a ___ServiceAccount___ objet to do so. The configuration parameters (timeout, keep-alive, err-log-path, ssl-protocols, ...)  are set by using a ___ConfigMap___ object.
 
-## Required resources:
+## k8s object used:
 - Deployment definition
 - Service definition to link to the deployment
 - ConfigMap for configuration
-- ServiceAccount to set right permissions and authentication.
+- ServiceAccount to set right permissions and authentication + Roles, ClusterRole and RoleBinding.
