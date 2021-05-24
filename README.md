@@ -144,6 +144,14 @@ $ kubectl create -f clusterip-svc.yml
 
 ## Set clusterIP ip range in service configuration (default 10.0.0.0/24)
 
+
+> Edit the kube-controller-manager-master pod (kubeadmn deployment) or service configuration file (from scrash).
+
+```
+$ kubectl -n kube-system edit pod kube-controller-manager-master
+```
+> It can also be defined at kubeadmn initialisation 
+
 _Custom clusterIP range configuration_ 
 
 ```
